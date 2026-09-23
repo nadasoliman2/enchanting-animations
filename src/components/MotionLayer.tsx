@@ -30,6 +30,10 @@ export function MotionLayer() {
     });
 
     const parallaxItems = Array.from(document.querySelectorAll<HTMLElement>("[data-parallax]"));
+    const heroSection = document.querySelector<HTMLElement>(".hero-section");
+    const heroCopy = document.querySelector<HTMLElement>(".hero-copy");
+    const heroStage = document.querySelector<HTMLElement>(".network-stage");
+    const scrollCue = document.querySelector<HTMLElement>(".scroll-cue");
 
     const applyParallax = () => {
       const viewport = window.innerHeight;
@@ -38,6 +42,29 @@ export function MotionLayer() {
         const rect = el.getBoundingClientRect();
         const offset = rect.top + rect.height / 2 - viewport / 2;
         el.style.transform = `translate3d(0, ${(offset * -speed).toFixed(2)}px, 0)`;
+      }
+
+      // Cinematic scroll-driven hero: content lifts + scales + fades, visual drifts slower,
+      // and the hero clips away smoothly instead of a plain fade.
+      if (heroSection) {
+        const rect = heroSection.getBoundingClientRect();
+        const progress = Math.min(1, Math.max(0, -rect.top / (rect.height || 1)));
+        if (progress <= 0.001) {
+          if (heroCopy) heroCopy.style.transform = "";
+          if (heroCopy) heroCopy.style.opacity = "";
+          if (heroStage) heroStage.style.transform = "";
+          if (heroStage) heroStage.style.opacity = "";
+        } else {
+          if (heroCopy) {
+            heroCopy.style.transform = `translate3d(0, ${(progress * -140).toFixed(1)}px, 0) scale(${(1 - progress * 0.07).toFixed(3)})`;
+            heroCopy.style.opacity = `${Math.max(0, 1 - progress * 1.25).toFixed(3)}`;
+          }
+          if (heroStage) {
+            heroStage.style.transform = `translate3d(0, ${(progress * -60).toFixed(1)}px, 0) scale(${(1 - progress * 0.04).toFixed(3)})`;
+            heroStage.style.opacity = `${Math.max(0, 1 - progress * 0.9).toFixed(3)}`;
+          }
+        }
+        if (scrollCue) scrollCue.style.opacity = `${Math.max(0, 1 - progress * 3).toFixed(2)}`;
       }
     };
 
@@ -69,7 +96,32 @@ export function MotionLayer() {
       document.removeEventListener("click", onAnchorClick);
       lenis.destroy();
       for (const el of parallaxItems) el.style.transform = "";
+      for (const el of [heroCopy, heroStage, scrollCue]) {
+        if (el) { el.style.transform = ""; el.style.opacity = ""; }
+      }
     };
+  }, []);
+
+  // Split cinematic headings into per-word masked spans for staggered reveals
+  useEffect(() => {
+    if (prefersReducedMotion()) return;
+    const heads = Array.from(document.querySelectorAll<HTMLElement>("[data-split]:not([data-split-done])"));
+    for (const el of heads) {
+      el.setAttribute("data-split-done", "");
+      const words = (el.textContent || "").trim().split(/\s+/);
+      el.textContent = "";
+      words.forEach((word, i) => {
+        const outer = document.createElement("span");
+        outer.className = "split-word";
+        const inner = document.createElement("span");
+        inner.textContent = word;
+        inner.style.setProperty("--i", String(i));
+        outer.appendChild(inner);
+        el.appendChild(outer);
+        if (i < words.length - 1) el.appendChild(document.createTextNode(" "));
+      });
+      el.classList.add("split-ready");
+    }
   }, []);
 
   // Global scroll reveal (works on every page, incl. routes without their own observer)
@@ -78,10 +130,10 @@ export function MotionLayer() {
       (entries) => entries.forEach((entry) => entry.isIntersecting && entry.target.classList.add("is-visible")),
       { threshold: 0.12, rootMargin: "0px 0px -6%" },
     );
-    const scan = () => document.querySelectorAll<HTMLElement>("[data-reveal]:not(.is-visible)").forEach((el) => observer.observe(el));
+    const scan = () => document.querySelectorAll<HTMLElement>("[data-reveal]:not(.is-visible), [data-reveal-stagger]:not(.is-visible), [data-split]:not(.is-visible)").forEach((el) => observer.observe(el));
     scan();
-    // rescan shortly after mount to catch route transitions / late-mounted nodes
-    const t = window.setTimeout(scan, 120);
+    // rescan shortly after mount to catch route transitions / late-mounted nodes + split words
+    const t = window.setTimeout(scan, 160);
     return () => {
       window.clearTimeout(t);
       observer.disconnect();

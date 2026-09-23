@@ -80,26 +80,26 @@ function Index() {
 
           <section className="manifesto-section" id="manifesto">
             <p className="section-index" data-reveal>01 / The operational gap</p>
-            <div className="manifesto-copy" data-reveal><h2>Your business may not need more tools.</h2><h2>It needs the right system.</h2></div>
+            <div className="manifesto-copy"><h2 data-split>Your business may not need more tools.</h2><h2 data-split>It needs the right system.</h2></div>
             <p className="manifesto-note" data-reveal>We remove operational drag by connecting teams, conversations, data, and decisions into one deliberate flow.</p>
-            <div className="friction-grid">{frictions.map((item, i) => <div key={item} data-reveal><span>0{i + 1}</span><p>{item}</p></div>)}</div>
+            <div className="friction-grid" data-reveal-stagger>{frictions.map((item, i) => <div key={item}><span>0{i + 1}</span><p>{item}</p></div>)}</div>
           </section>
 
           <section className="services-section" id="services">
-            <div className="section-heading" data-reveal><p className="section-index">02 / Capabilities</p><h2>We build connected digital systems around real business workflows.</h2></div>
+            <div className="section-heading" data-reveal><p className="section-index">02 / Capabilities</p><h2 data-split>We build connected digital systems around real business workflows.</h2></div>
             <div className="capability-list">{capabilities.map((capability) => { const Icon = capability.icon; return <article className="capability-row spotlight-card" key={capability.number} data-reveal><span className="capability-number">{capability.number}</span><Icon className="capability-icon" /><h3>{capability.title}</h3><p>{capability.description}</p><ChevronRight className="capability-arrow" /></article>; })}</div>
           </section>
 
           <section className="featured-section" id="work">
-            <div className="featured-copy" data-reveal><p className="section-index">03 / Flagship intelligence</p><div className="featured-mark"><MessageCircleMore /> Every Second AI</div><h2>Every conversation becomes an opportunity.</h2><p>An autonomous communication platform that responds instantly, qualifies intent, routes conversations, and keeps every customer journey moving across WhatsApp, web, and social channels.</p><ul><li>AI sales and support agents</li><li>Lead qualification and smart routing</li><li>Real-time context and CRM synchronization</li><li>Human handover without lost history</li></ul><Link to="/contact" className="primary-action" data-magnetic="0.4">Explore Every Second AI <ArrowUpRight /></Link></div>
+            <div className="featured-copy" data-reveal><p className="section-index">03 / Flagship intelligence</p><div className="featured-mark"><MessageCircleMore /> Every Second AI</div><h2 data-split>Every conversation becomes an opportunity.</h2><p>An autonomous communication platform that responds instantly, qualifies intent, routes conversations, and keeps every customer journey moving across WhatsApp, web, and social channels.</p><ul><li>AI sales and support agents</li><li>Lead qualification and smart routing</li><li>Real-time context and CRM synchronization</li><li>Human handover without lost history</li></ul><Link to="/contact" className="primary-action" data-magnetic="0.4">Explore Every Second AI <ArrowUpRight /></Link></div>
             <div className="signal-visual" data-reveal data-parallax="0.08" aria-hidden="true"><div className="signal-pulse" /><div className="signal-core">AI</div><div className="signal-ring signal-ring--one" /><div className="signal-ring signal-ring--two" /><div className="signal-orbit"><span /><span /><span /></div><div className="data-card data-card--one">Lead qualified <strong>92%</strong></div><div className="data-card data-card--two">Response time <strong>1.2s</strong></div></div>
           </section>
 
-          <section className="process-section" id="process"><div className="section-heading" data-reveal><p className="section-index">04 / How we work</p><h2>From operational friction to a system that compounds.</h2></div><div className="process-grid">{process.map(([number, title, text]) => <article className="spotlight-card" key={number} data-reveal data-tilt="5"><span>{number}</span><h3>{title}</h3><p>{text}</p></article>)}</div></section>
+          <section className="process-section" id="process"><div className="section-heading" data-reveal><p className="section-index">04 / How we work</p><h2 data-split>From operational friction to a system that compounds.</h2></div><div className="process-grid">{process.map(([number, title, text]) => <article className="spotlight-card" key={number} data-reveal data-tilt="5"><span>{number}</span><h3>{title}</h3><p>{text}</p></article>)}</div></section>
 
-          <section className="outcomes-section"><div data-reveal><span>24/7</span><p>Autonomous customer operations</p></div><div data-reveal><span>&lt;1s</span><p>Real-time system response</p></div><div data-reveal><span>1</span><p>Connected source of truth</p></div><div data-reveal><span>∞</span><p>Designed to evolve</p></div></section>
+          <section className="outcomes-section" data-reveal-stagger><div><span>24/7</span><p>Autonomous customer operations</p></div><div><span>&lt;1s</span><p>Real-time system response</p></div><div><span>1</span><p>Connected source of truth</p></div><div><span>∞</span><p>Designed to evolve</p></div></section>
 
-          <section className="contact-section"><div className="contact-inner" data-reveal><p className="section-index">05 / Start here</p><h2>Ready to transform how your business operates?</h2><Link to="/contact" className="contact-link" data-magnetic="0.25">Let’s engineer what’s next. <ArrowUpRight /></Link></div></section>
+          <section className="contact-section"><div className="contact-inner" data-reveal><p className="section-index">05 / Start here</p><h2 data-split>Ready to transform how your business operates?</h2><Link to="/contact" className="contact-link" data-magnetic="0.25">Let’s engineer what’s next. <ArrowUpRight /></Link></div></section>
         </main>
       </PageShell>
     </>
