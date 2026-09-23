@@ -72,9 +72,9 @@ function Index() {
               <p className="eyebrow"><span /> AI & digital transformation</p>
               <h1><span className="line-mask"><span>Engineering smarter</span></span><span className="line-mask"><span className="accent-text">digital ecosystems.</span></span></h1>
               <p className="hero-description">We turn fragmented operations into intelligent, connected systems built around how your business actually works.</p>
-              <div className="hero-actions"><Link to="/contact" className="primary-action">Request a consultation <ArrowUpRight /></Link><a href="#services" className="text-action">Explore our systems <ArrowDown /></a></div>
+              <div className="hero-actions"><Link to="/contact" className="primary-action" data-magnetic="0.4">Request a consultation <ArrowUpRight /></Link><a href="#services" className="text-action">Explore our systems <ArrowDown /></a></div>
             </div>
-            <div className={`network-stage ${introDone ? "network-stage--ready" : ""}`}><canvas ref={canvasRef} aria-label="Animated network of connected digital systems" /><div className="network-label"><span /> Autonomous logic engine / live</div><div className="network-stat"><span>Connected intelligence</span><strong>Always in motion</strong></div></div>
+            <div className={`network-stage spotlight-card ${introDone ? "network-stage--ready" : ""}`} data-tilt="6"><canvas ref={canvasRef} aria-label="Animated network of connected digital systems" /><div className="network-label"><span /> Autonomous logic engine / live</div><div className="network-stat"><span>Connected intelligence</span><strong>Always in motion</strong></div></div>
             <a className="scroll-cue" href="#manifesto" aria-label="Scroll to learn more"><ArrowDown /></a>
           </section>
 
@@ -87,19 +87,19 @@ function Index() {
 
           <section className="services-section" id="services">
             <div className="section-heading" data-reveal><p className="section-index">02 / Capabilities</p><h2>We build connected digital systems around real business workflows.</h2></div>
-            <div className="capability-list">{capabilities.map((capability) => { const Icon = capability.icon; return <article className="capability-row" key={capability.number} data-reveal><span className="capability-number">{capability.number}</span><Icon className="capability-icon" /><h3>{capability.title}</h3><p>{capability.description}</p><ChevronRight className="capability-arrow" /></article>; })}</div>
+            <div className="capability-list">{capabilities.map((capability) => { const Icon = capability.icon; return <article className="capability-row spotlight-card" key={capability.number} data-reveal><span className="capability-number">{capability.number}</span><Icon className="capability-icon" /><h3>{capability.title}</h3><p>{capability.description}</p><ChevronRight className="capability-arrow" /></article>; })}</div>
           </section>
 
           <section className="featured-section" id="work">
-            <div className="featured-copy" data-reveal><p className="section-index">03 / Flagship intelligence</p><div className="featured-mark"><MessageCircleMore /> Every Second AI</div><h2>Every conversation becomes an opportunity.</h2><p>An autonomous communication platform that responds instantly, qualifies intent, routes conversations, and keeps every customer journey moving across WhatsApp, web, and social channels.</p><ul><li>AI sales and support agents</li><li>Lead qualification and smart routing</li><li>Real-time context and CRM synchronization</li><li>Human handover without lost history</li></ul><Link to="/contact" className="primary-action">Explore Every Second AI <ArrowUpRight /></Link></div>
-            <div className="signal-visual" data-reveal aria-hidden="true"><div className="signal-pulse" /><div className="signal-core">AI</div><div className="signal-ring signal-ring--one" /><div className="signal-ring signal-ring--two" /><div className="signal-orbit"><span /><span /><span /></div><div className="data-card data-card--one">Lead qualified <strong>92%</strong></div><div className="data-card data-card--two">Response time <strong>1.2s</strong></div></div>
+            <div className="featured-copy" data-reveal><p className="section-index">03 / Flagship intelligence</p><div className="featured-mark"><MessageCircleMore /> Every Second AI</div><h2>Every conversation becomes an opportunity.</h2><p>An autonomous communication platform that responds instantly, qualifies intent, routes conversations, and keeps every customer journey moving across WhatsApp, web, and social channels.</p><ul><li>AI sales and support agents</li><li>Lead qualification and smart routing</li><li>Real-time context and CRM synchronization</li><li>Human handover without lost history</li></ul><Link to="/contact" className="primary-action" data-magnetic="0.4">Explore Every Second AI <ArrowUpRight /></Link></div>
+            <div className="signal-visual" data-reveal data-parallax="0.08" aria-hidden="true"><div className="signal-pulse" /><div className="signal-core">AI</div><div className="signal-ring signal-ring--one" /><div className="signal-ring signal-ring--two" /><div className="signal-orbit"><span /><span /><span /></div><div className="data-card data-card--one">Lead qualified <strong>92%</strong></div><div className="data-card data-card--two">Response time <strong>1.2s</strong></div></div>
           </section>
 
-          <section className="process-section" id="process"><div className="section-heading" data-reveal><p className="section-index">04 / How we work</p><h2>From operational friction to a system that compounds.</h2></div><div className="process-grid">{process.map(([number, title, text]) => <article key={number} data-reveal><span>{number}</span><h3>{title}</h3><p>{text}</p></article>)}</div></section>
+          <section className="process-section" id="process"><div className="section-heading" data-reveal><p className="section-index">04 / How we work</p><h2>From operational friction to a system that compounds.</h2></div><div className="process-grid">{process.map(([number, title, text]) => <article className="spotlight-card" key={number} data-reveal data-tilt="5"><span>{number}</span><h3>{title}</h3><p>{text}</p></article>)}</div></section>
 
           <section className="outcomes-section"><div data-reveal><span>24/7</span><p>Autonomous customer operations</p></div><div data-reveal><span>&lt;1s</span><p>Real-time system response</p></div><div data-reveal><span>1</span><p>Connected source of truth</p></div><div data-reveal><span>∞</span><p>Designed to evolve</p></div></section>
 
-          <section className="contact-section"><div className="contact-inner" data-reveal><p className="section-index">05 / Start here</p><h2>Ready to transform how your business operates?</h2><Link to="/contact" className="contact-link">Let’s engineer what’s next. <ArrowUpRight /></Link></div></section>
+          <section className="contact-section"><div className="contact-inner" data-reveal><p className="section-index">05 / Start here</p><h2>Ready to transform how your business operates?</h2><Link to="/contact" className="contact-link" data-magnetic="0.25">Let’s engineer what’s next. <ArrowUpRight /></Link></div></section>
         </main>
       </PageShell>
     </>

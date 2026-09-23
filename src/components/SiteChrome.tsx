@@ -4,6 +4,7 @@ import { useState, type ReactNode } from "react";
 
 import brandLogo from "../assets/tech-oriented-logo.webp.asset.json";
 import { Button } from "./ui/button";
+import { MotionLayer } from "./MotionLayer";
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
@@ -19,7 +20,7 @@ export function SiteHeader() {
         <Link to="/" hash="process">Process</Link>
         <Link to="/contact">Contact</Link>
       </nav>
-      <Button asChild className="header-contact">
+      <Button asChild className="header-contact" data-magnetic="0.4">
         <Link to="/contact">Start a project <ArrowUpRight size={16} /></Link>
       </Button>
       <Button
@@ -66,5 +67,5 @@ export function SiteFooter() {
 }
 
 export function PageShell({ children }: { children: ReactNode }) {
-  return <div className="site-shell"><SiteHeader />{children}<SiteFooter /></div>;
+  return <div className="site-shell"><MotionLayer /><SiteHeader />{children}<SiteFooter /></div>;
 }
