@@ -20,11 +20,13 @@ export function MotionLayer() {
   useEffect(() => {
     if (prefersReducedMotion()) return;
 
+    // lerp-based momentum scroll to match the heavy, buttery feel of fantasy.co
     const lenis = new Lenis({
-      duration: 1.15,
-      easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      lerp: 0.075,
+      wheelMultiplier: 1,
       smoothWheel: true,
-      touchMultiplier: 1.6,
+      syncTouch: true,
+      touchMultiplier: 1.5,
     });
 
     const parallaxItems = Array.from(document.querySelectorAll<HTMLElement>("[data-parallax]"));
@@ -67,6 +69,22 @@ export function MotionLayer() {
       document.removeEventListener("click", onAnchorClick);
       lenis.destroy();
       for (const el of parallaxItems) el.style.transform = "";
+    };
+  }, []);
+
+  // Global scroll reveal (works on every page, incl. routes without their own observer)
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => entries.forEach((entry) => entry.isIntersecting && entry.target.classList.add("is-visible")),
+      { threshold: 0.12, rootMargin: "0px 0px -6%" },
+    );
+    const scan = () => document.querySelectorAll<HTMLElement>("[data-reveal]:not(.is-visible)").forEach((el) => observer.observe(el));
+    scan();
+    // rescan shortly after mount to catch route transitions / late-mounted nodes
+    const t = window.setTimeout(scan, 120);
+    return () => {
+      window.clearTimeout(t);
+      observer.disconnect();
     };
   }, []);
 
